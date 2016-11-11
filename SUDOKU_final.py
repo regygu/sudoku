@@ -26,7 +26,7 @@ def difficulty():
     print()
     number = input("Válasszon nehézségi szintet: Könnyű [1] / Közepes [2] / Nehéz [3] ")
     if number == "1":
-        x, y = 4, 5
+        x, y = 0, 1
     elif number == "2":
         x, y = 6, 7
     elif number == "3":
@@ -145,7 +145,11 @@ def main():
                     print("Valami még biztosan hibás, vagy hiányzik. Ellenőrizd és javítsd ki a hibát!")
                     main()
                 elif isinstance(mapcopy[i][j], str):
-                    mapcopy[i][j] = int(mapcopy[i][j].strip("\033[34m\033[0m\x1b[34m\x1b[0m "))
+                    mapcopy[i][j] = mapcopy[i][j].replace("\033[34m", "")
+                    mapcopy[i][j] = mapcopy[i][j].replace("\033[0m", "")
+                    mapcopy[i][j] = mapcopy[i][j].replace("x1b[34m", "")
+                    mapcopy[i][j] = mapcopy[i][j].replace("\x1b[0m", "")
+                    mapcopy[i][j] = int(mapcopy[i][j])
         if mapcopy == check_map:
             print("Gratulálok, nyertél!")
         else:
